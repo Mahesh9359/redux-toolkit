@@ -1,18 +1,57 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { increment, decrement } from './redux/counterSlice';
-import './App.css'
+import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { decrement, increment, reset, incrementByAmount } from './features/counterSlice'
 
 export default function Counter() {
-  const count = useSelector((state) => state.counter.count);
-  const dispatch = useDispatch();
+    const [input, setInput] = useState(0)
+    const count = useSelector((state) => state.counter.value)
+    const dispatch = useDispatch()
 
-  return (
-    <div style={{ textAlign: 'center', marginTop: '50px' }}>
-      <h1>Redux Toolkit Counter</h1>
-      <h2>Count: {count}</h2>
-      <button onClick={() => dispatch(increment())}> + </button>
-      <button onClick={() => dispatch(decrement())}> - </button>
-    </div>
-  );
+    const handleIncrementByAmount = () => {
+        dispatch(incrementByAmount(input));
+        setInput(0);
+    }
+
+    return (
+        <div>
+            <div>
+                <button
+                    aria-label="Increment value"
+                    onClick={() => dispatch(increment())}
+                >
+                    Increment
+                </button>
+                <span>{count}</span>
+                <button
+                    aria-label="Decrement value"
+                    onClick={() => dispatch(decrement())}
+                >
+                    Decrement
+                </button>
+                <br />
+                <br />
+                <button
+                    aria-label="Reset value"
+                    onClick={() => dispatch(reset())}
+                >
+                    Reset
+                </button>
+                <br />
+                <br />
+                <input type='Number'
+                    value={input}
+                    onChange={(e) => setInput(Number(e.target.value))}
+                />
+                <br />
+                <br />
+                <button
+                    aria-label="Inc By Count"
+                    onClick  = { handleIncrementByAmount }
+                >
+                    Increment by {input}
+                </button>
+                <br/>
+            </div>
+        </div>
+    )
 }
