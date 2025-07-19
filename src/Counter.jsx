@@ -50,7 +50,8 @@ export default function Counter() {
                 >
                     Increment by {input}
                 </button>
-                <br/>
+                <br/>   
+                <p>Incremented by {input}</p>
             </div>
         </div>
     )
