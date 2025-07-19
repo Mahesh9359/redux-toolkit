@@ -1,13 +1,13 @@
 import React from 'react';
 import Counter from './Counter';
-import './App.css'
+import UserList from './UserList';
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
+    <div>
       <Counter />
+      <hr />
+      <UserList /> 
     </div>
   );
 }
-
-export default App;
